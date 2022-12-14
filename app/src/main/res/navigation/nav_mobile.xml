@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_mobile"
+    app:startDestination="@id/mapFragment">
+
+    <fragment
+        android:id="@+id/placesFragment"
+        android:name="ru.netology.yandexmap.ui.PlacesFragment"
+        android:label="PlacesFragment" >
+        <action
+            android:id="@+id/action_placesFragment_to_editPlaceFragment"
+            app:destination="@id/editPlaceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_placesFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="ru.netology.yandexmap.ui.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_placesFragment"
+            app:destination="@id/placesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <dialog
+        android:id="@+id/editPlaceFragment"
+        android:name="ru.netology.yandexmap.ui.EditPlaceFragment"
+        android:label="EditPlaceFragment" />
+
+</navigation>

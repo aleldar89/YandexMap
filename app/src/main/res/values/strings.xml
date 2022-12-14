@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">YandexMap</string>
+    <string name="empty_title_error">Title is required</string>
+    <string name="enter_place_name">Enter place name</string>
+    <string name="remove">remove</string>
+</resources>
