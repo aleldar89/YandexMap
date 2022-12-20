@@ -14,6 +14,8 @@ import ru.netology.yandexmap.R
 
 class NewPlaceFragment : DialogFragment() {
 
+    private val viewModel: MapViewModel by activityViewModels()
+
     companion object {
         private const val LAT_KEY = "LAT_KEY"
         private const val LONG_KEY = "LONG_KEY"
@@ -29,7 +31,6 @@ class NewPlaceFragment : DialogFragment() {
             .setTitle(getString(R.string.enter_place_name))
             .setView(inputText)
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                val viewModel: MapViewModel by activityViewModels()
 
                 val title = inputText.text?.toString()?.takeIf {
                     it.isNotBlank()

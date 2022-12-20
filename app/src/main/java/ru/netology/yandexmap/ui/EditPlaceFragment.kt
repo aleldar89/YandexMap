@@ -16,6 +16,7 @@ import ru.netology.yandexmap.R
 
 class EditPlaceFragment : DialogFragment() {
 
+    private val viewModel: MapViewModel by activityViewModels()
 
     companion object {
         var Bundle.textArg: String? by StringArg
@@ -28,11 +29,11 @@ class EditPlaceFragment : DialogFragment() {
             builder.setTitle("Edit place")
                 .setView(inputText)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val viewModel: MapViewModel by activityViewModels()
                     val gson = Gson()
+
                     val place: Place = arguments?.textArg.let { string ->
                         gson.fromJson(string, Place::class.java)
-                    }
+                    } ?: throw NullPointerException("Edit place error")
 
                     val newTitle = inputText.text?.toString()?.takeIf {
                         it.isNotBlank()

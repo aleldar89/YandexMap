@@ -14,6 +14,7 @@ import ru.netology.yandexmap.databinding.PlaceListBinding
 
 class PlacesFragment : Fragment() {
 
+    private val viewModel: MapViewModel by activityViewModels()
 
     companion object {
         var Bundle.textArg: String? by StringArg
@@ -24,7 +25,6 @@ class PlacesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel: MapViewModel by activityViewModels()
         val binding = PlaceListBinding.inflate(inflater, container, false)
         val gson = Gson()
         val adapter = PlacesAdapter(object : OnInteractionListener {

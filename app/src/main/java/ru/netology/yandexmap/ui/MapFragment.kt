@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -21,17 +22,18 @@ import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.user_location.UserLocationLayer
 import com.yandex.runtime.ui_view.ViewProvider
 import ru.netology.yandexmap.MapViewModel
+import ru.netology.yandexmap.Place
 import ru.netology.yandexmap.R
 import ru.netology.yandexmap.databinding.FragmentMapBinding
 import ru.netology.yandexmap.databinding.PlaceBinding
 
 class MapFragment : Fragment() {
 
+    private val viewModel: MapViewModel by activityViewModels()
+
     companion object {
         var Bundle.textArg: String? by StringArg
     }
-
-    private val viewModel: MapViewModel by activityViewModels()
 
     private var mapView: MapView? = null
     private lateinit var userLocationLayer: UserLocationLayer
@@ -67,10 +69,11 @@ class MapFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MapKitFactory.setApiKey("e35ce02e-18b3-4678-9859-286826ff3245")
-        MapKitFactory.initialize(requireContext())
+    // обязательно должно быть свойством
+    private val markerTapListener = MapObjectTapListener { marker, _ ->
+        // получаем данные
+        Toast.makeText(requireContext(), (marker.userData as Place).title, Toast.LENGTH_SHORT).show()
+        true
     }
 
     override fun onCreateView(
@@ -100,12 +103,15 @@ class MapFragment : Fragment() {
                     val placeBinding = PlaceBinding.inflate(layoutInflater)
                     placeBinding.root.text = it.title
 
-                    collection.addPlacemark(
+                    val placemark = collection.addPlacemark(
                         Point(it.lat, it.long),
                         ViewProvider(placeBinding.root)
                     )
+                    placemark.userData = it // пробрасываем данные
+                    placemark.addTapListener(markerTapListener)
                 }
             }
+
         }
 
         binding.myLocation.setOnClickListener {
