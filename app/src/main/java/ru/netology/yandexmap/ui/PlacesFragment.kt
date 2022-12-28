@@ -29,10 +29,10 @@ class PlacesFragment : Fragment() {
         val gson = Gson()
         val adapter = PlacesAdapter(object : OnInteractionListener {
             override fun onEdit(place: Place) {
-                Bundle().apply {
+                val bundle = Bundle().apply {
                     textArg = gson.toJson(place)
                 }
-                findNavController().navigate(R.id.action_placesFragment_to_editPlaceFragment)
+                findNavController().navigate(R.id.action_placesFragment_to_editPlaceFragment, bundle)
             }
 
             override fun onRemove(place: Place) {

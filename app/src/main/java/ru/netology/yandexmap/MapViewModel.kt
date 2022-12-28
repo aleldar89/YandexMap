@@ -5,13 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yandex.mapkit.geometry.Point
 
-private val empty = Place(
-    id = 0,
-    lat = 0.0,
-    long = 0.0,
-    title = ""
-)
-
 class MapViewModel : ViewModel() {
 
     private var nextId = 1

@@ -31,10 +31,6 @@ class MapFragment : Fragment() {
 
     private val viewModel: MapViewModel by activityViewModels()
 
-    companion object {
-        var Bundle.textArg: String? by StringArg
-    }
-
     private var mapView: MapView? = null
     private lateinit var userLocationLayer: UserLocationLayer
 
@@ -81,7 +77,6 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val binding = FragmentMapBinding.inflate(inflater, container, false)
 
         mapView = binding.mapView.apply {
